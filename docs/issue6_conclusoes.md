@@ -4,14 +4,15 @@
 
 ## Parágrafo para o relatório
 
-Na análise histórica de 360 configurações do classificador KNN sobre dados de precipitação mensal da APAC, o maior F1 macro foi 0,7224, com desvio de 0,0436 entre folds, utilizando 3.337 instâncias, imputação por mediana, StandardScaler, cinco vizinhos, ponderação por distância e métrica Manhattan. Os cinco melhores experimentos variaram apenas 0,00374 ponto no F1 macro, abaixo do menor desvio entre folds entre esses modelos (0,0401), o que não permite afirmar a superioridade robusta de uma única configuração. A EDA identificou desequilíbrio na distribuição entre as cinco mesorregiões e diferentes perfis de precipitação sazonal, reforçando o uso de F1 macro e a avaliação de todos os meses. A comparação entre usar ou não o limite de seis meses ausentes é descritiva, pois envolve populações diferentes (3.337 e 5.104 instâncias). As métricas históricas devem ser reexecutadas com os rótulos corrigidos na Issue #4 antes de serem tratadas como resultados finais.
+Foram analisados 360 experimentos de classificação utilizando o algoritmo K-Nearest Neighbors (KNN), considerando diferentes configurações de imputação, normalização, métricas de distância, pesos dos vizinhos, número de vizinhos e tratamento de valores ausentes. A melhor configuração registrada apresentou F1 macro de 0,7224, com desvio de 0,0436 entre os folds. Observou-se que a diferença de desempenho entre os cinco melhores experimentos foi de aproximadamente 0,00374, valor inferior à variabilidade observada durante a validação cruzada, indicando que não há evidências suficientes para afirmar a superioridade de uma configuração específica. Além disso, os experimentos com limite de seis meses ausentes apresentaram desempenho superior aos realizados sem esse limite. Entretanto, essa comparação deve ser interpretada com cautela, pois os conjuntos de dados possuem quantidades diferentes de instâncias (3.337 e 5.104, respectivamente). A análise exploratória também contemplou a distribuição das mesorregiões, o comportamento mensal das precipitações e a correlação entre os atributos, contribuindo para a compreensão dos dados e para a interpretação dos resultados do modelo.
 
-## Pitch (4 tópicos)
+## Pitch (5 tópicos)
 
-1. Base APAC: 5.104 registros de posto × ano, 12 atributos mensais e cinco mesorregiões; classes desbalanceadas.
-2. EDA: distribuição por classe, sazonalidade por mês e por região, correlações entre meses; não excluir extremos só porque aparecem no boxplot.
-3. Grade histórica de 360 configurações: melhor F1 macro 0,7224 ± 0,0436 (desvio entre folds); top 5 separados por somente 0,00374.
-4. Decisão: reportar média e desvio, priorizar F1 macro, evitar afirmar um único vencedor e reexecutar os experimentos com a correção do alvo antes dos slides finais.
+1. **Análise exploratória:** investigamos a distribuição das cinco mesorregiões pernambucanas, o comportamento mensal das chuvas e as correlações entre os atributos.
+2. **Experimentos:** avaliamos 360 configurações do algoritmo KNN, considerando diferentes estratégias de pré-processamento e parâmetros de classificação.
+3. **Melhor desempenho:** a melhor configuração registrada alcançou F1 macro de 0,7224, utilizando imputação pela mediana, StandardScaler, distância Manhattan, pesos por distância e cinco vizinhos.
+4. **Estabilidade dos resultados:** os cinco melhores experimentos apresentaram diferenças pequenas de desempenho em comparação com a variabilidade entre os folds, não sendo possível afirmar que uma configuração é claramente superior.
+5. **Valores ausentes:** limitar a quantidade de meses sem informações apresentou resultados melhores, mas reduziu a base de 5.104 para 3.337 registros, exigindo cautela na interpretação.
 
 ## Figuras e interpretações
 

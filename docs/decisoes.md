@@ -77,3 +77,13 @@ A inclusão da quantidade de meses ausentes como atributo adicional não melhoro
 - [ ] Balanceamento para o São Francisco (Aula 8)
 - [ ] Seleção de features (Aula 7)
 - [ ] Confirmar data de entrega e formato da apresentação com a professora
+
+## Limpeza: valores incorretos, duplicatas e outliers — issue #13 (23/11/2026, Eric)
+
+- No CSV bruto (5.104 linhas), **0 valores negativos**, **0 tokens não numéricos inesperados** (excluindo `-`, interpretado provisoriamente como ausente), **0 linhas duplicadas** e **0 duplicatas por (`Código`, `Ano`)**. Há 25.309 células mensais ausentes; a interpretação definitiva de `-` permanece com a issue #5.
+- Há **75 registros** com algum valor mensal acima de 600 mm, com máximo observado de **1.036,2 mm em junho**. São valores a conferir com dados da estação/APAC, não necessariamente erros físicos.
+- Diagnóstico IQR (1,5 × IQR, por mês e mesorregião): **1.442 células mensais** assinaladas como outliers; diagnóstico não implica remoção das medições.
+- **64 nomes de municípios** têm mais de um código de posto. Entre 70 pares com pelo menos cinco anos de totais anuais simultâneos, há correlação média ~0,566 e máxima ~0,995. Postos distintos não foram removidos; a correlação pode ser afetada por meses ausentes.
+- **Comparação na base v1 com os rótulos corrigidos da issue #4**, 3.337 instâncias, validação por posto (StratifiedGroupKFold 5 folds, seed 42), mediana + StandardScaler + KNN (k=5, pesos por distância, Manhattan): sem teto **F1 macro 0,723 ± 0,032**, **F1 São Francisco 0,559**; com teto fixo de 600 mm **F1 macro 0,720 ± 0,031**, **F1 São Francisco 0,553**. A acurácia foi de 0,744 e 0,742, respectivamente.
+- **Decisão recomendada para a issue #12:** não aplicar o teto de 600 mm no pipeline final, pois não melhorou F1 macro nem F1 de São Francisco; manter valores observados e investigar picos por fonte meteorológica antes de qualquer exclusão. O teto testado via `FunctionTransformer` transforma as features de treino e previsão de maneira consistente, **sem excluir linhas do teste**. Imputação e escalonamento são ajustados apenas nos folds de treino.
+- Evidências e tabelas: seção "Issue #13" em `notebooks/05_Limpeza.ipynb`. O arquivo `data/raw/` não foi modificado.

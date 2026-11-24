@@ -33,17 +33,17 @@ python src/experimentos.py            # 360 experimentos + matriz de confusão -
 
 ## Resultados
 
-Validação por posto (StratifiedGroupKFold, 5 folds, seed 42). Baseline (Dummy): acurácia 0,33 e F1 macro 0,10.
+Validação por posto (StratifiedGroupKFold, 5 folds, seed 42), com o alvo corrigido na issue #4. Baseline (Dummy): acurácia 0,34 e F1 macro 0,10.
 
 | Modelo | F1 macro | Acurácia | F1 São Francisco |
 |---|---|---|---|
-| Melhor KNN (KNNImputer, ≤6 meses ausentes, StandardScaler, k=3, distance, manhattan) | 0,726 | 0,748 | 0,587 |
+| Melhor KNN (mediana, ≤6 meses ausentes, MinMax, k=9, distance, manhattan) | 0,711 | 0,745 | 0,507 |
 
-Extras testados no notebook 03: imputar "-" como zero (F1 0,745, hipótese ainda sem confirmação da APAC), indicador de ausência (0,680), seleção de atributos e PCA (sem ganho) e balanceamento (aumenta o recall do São Francisco, mas reduz o F1 macro).
+Os 10 melhores modelos ficam entre 0,705 e 0,711, dentro do desvio entre folds (≈ 0,03).
 
-Os erros se concentram entre regiões vizinhas: Agreste e Mata, Agreste e Sertão, Sertão e São Francisco.
+Extras (notebook 03): imputar "-" como zero dá F1 0,733 (0,748 com até 4 meses vazios; hipótese sem confirmação da APAC); o indicador de ausência piora (0,685); seleção de atributos e PCA não ajudam (0,578 a 0,686 contra 0,705); balanceamento sobe o recall do São Francisco (0,49 → 0,69 a 0,73) e reduz o F1 macro (0,656 a 0,685).
 
-## Documentação
+Erros: concentrados entre regiões vizinhas (São Francisco → Sertão: 145; Mata → Agreste: 143).
 - `docs/decisoes.md` — decisões de método, resultados registrados e pendências.
 - Tarefas: aba **Issues** do repositório (cada uma com responsável e prazo).
 

@@ -1,29 +1,29 @@
-Melhor configuração:
-id                      281
+Melhor configuração (notebook 02, protocolo principal, alvo com mapeamento corrigido na issue #4):
+id                      239
 max_ausentes              6
 n_instancias           3337
-imputador       knn_imputer
-scaler             standard
-k                         3
+imputador           mediana
+scaler               minmax
+k                         9
 pesos              distance
 metrica           manhattan
-acc                0.747631
-acc_std            0.011674
-bal_acc            0.740804
-f1_macro           0.725893
-f1_std             0.030218
-seg                    2.07
+acc                0.744475
+bal_acc            0.711677
+f1_macro           0.711389
+f1_std             0.027636
 
 Instâncias usadas: 3337
 
                             precision    recall  f1-score   support
 
-      Agreste Pernambucano      0.768     0.778     0.773      1114
-         Mata Pernambucana      0.744     0.742     0.743       752
-   Metropolitana do Recife      0.811     0.820     0.816       367
-       Sertão Pernambucano      0.763     0.726     0.744       836
-São Francisco Pernambucano      0.564     0.612     0.587       268
+      Agreste Pernambucano      0.763     0.825     0.793      1140
+         Mata Pernambucana      0.747     0.704     0.725       726
+   Metropolitana do Recife      0.814     0.787     0.801       367
+       Sertão Pernambucano      0.716     0.783     0.748       774
+São Francisco Pernambucano      0.638     0.421     0.507       330
 
-                  accuracy                          0.748      3337
-                 macro avg      0.730     0.736     0.732      3337
-              weighted avg      0.750     0.748     0.749      3337
+                  accuracy                          0.745      3337
+                 macro avg      0.736     0.704     0.715      3337
+              weighted avg      0.742     0.745     0.740      3337
+
+Os 10 melhores modelos ficam entre 0,705 e 0,711 de F1 macro, dentro do desvio entre folds (~0,03).

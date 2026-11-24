@@ -36,6 +36,13 @@ Execução do Randell no Colab (15/11): melhor F1 macro **0,726**, acurácia 0,7
 - Outra execução, com versão diferente do scikit-learn, deu F1 0,722. Os folds mudam um pouco entre versões, então é preciso reportar média e desvio.
 - Principal confusão: São Francisco classificado como Sertão (regiões vizinhas, clima semiárido).
 
+## Conferência do alvo — issue #4 (23/11/2026, Eric)
+
+- Fonte oficial: Condepe/Fidem, **Mesorregiões** (lista dos 185 municípios na divisão histórica do IBGE): https://www.cf.pe.gov.br/observatorio/mapas/regioes/mesorregioes ; IBGE, *Divisão Regional do Brasil em Mesorregiões e Microrregiões Geográficas*, páginas 52–55.
+- **Mapeamento conferido, 6 ajustes:** `Afrânio`, `Dormentes`, `Itacuruba`, `Terra Nova` de Sertão → São Francisco Pernambucano; `Feira Nova`, `Machados` de Mata → Agreste Pernambucano.
+- Total 5.104 registros; **0 sem mesorregião**; variantes de grafia consistentes; 15 nomes amostrados (seed 42) conferidos com a fonte oficial em `notebooks/05_Limpeza.ipynb`.
+- CSV apresenta **319 códigos de posto únicos**; a anotação anterior de 310 postos deve ser revista.
+- **Atenção:** os resultados de modelagem e a distribuição das classes documentados em 15/11 são **anteriores à correção**; refazer métricas/experimentos com os rótulos revisados.
  ### Issue #5 — Tratamento de valores ausentes (23/11)
 
 **Responsável:** Ricardo  
